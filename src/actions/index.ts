@@ -36,6 +36,9 @@ export async function createLead(
         source: "GOOGLE",
       },
     });
+    return {
+      message: "The lead has been saved successfully",
+    };
   } catch (err: unknown) {
     if (err instanceof Error) {
       return {

@@ -5,15 +5,29 @@ import * as actions from "@/actions";
 
 export default function LeadForm() {
   const [step, setStep] = useState(1); // To track the current step
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    source: "",
+  });
 
   const [formState, action] = useActionState(actions.createLead, {
     message: "",
   });
 
   const handleNextStep = () => {
-    if (step === 1) {
+    if (step === 1 && formData.name && formData.email) {
       setStep(2); // Proceed to step 2
     }
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const handlePreviousStep = () => {
@@ -41,6 +55,8 @@ export default function LeadForm() {
               type="text"
               className="border rounded p-2 w-full"
               id="name"
+              value={formData.name}
+              onChange={handleChange}
               required
             />
           </div>
@@ -54,6 +70,8 @@ export default function LeadForm() {
               type="email"
               className="border rounded p-2 w-full"
               id="email"
+              value={formData.email}
+              onChange={handleChange}
               required
             />
           </div>
@@ -67,10 +85,10 @@ export default function LeadForm() {
             </label>
             <select
               name="source"
-              // value={formData.source}
-              // onChange={handleChange}
               className="border rounded p-2 w-full"
               id="source"
+              value={formData.source}
+              onChange={handleChange}
               required
             >
               <option value="">Select a source</option>
@@ -83,7 +101,13 @@ export default function LeadForm() {
 
         {/* Error Message */}
         {formState?.message ? (
-          <div className="my-2 p-2 bg-red-200 border rounded border-red-400">
+          <div
+            className={
+              formState.message !== "The lead has been saved successfully"
+                ? "my-2 p-2 bg-red-200 border rounded border-red-400"
+                : "my-2 p-2 bg-green-200 border rounded border-green-400"
+            }
+          >
             {formState.message}
           </div>
         ) : null}
