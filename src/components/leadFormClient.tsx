@@ -92,9 +92,9 @@ export default function LeadForm() {
               required
             >
               <option value="">Select a source</option>
-              <option value="Google">Google</option>
-              <option value="Social Media">Social Media</option>
-              <option value="Friends">Friends</option>
+              <option value="GOOGLE">Google</option>
+              <option value="SOCIAL_MEDIA">Social Media</option>
+              <option value="FRIENDS">Friends</option>
             </select>
           </div>
         </div>

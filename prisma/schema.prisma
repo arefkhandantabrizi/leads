@@ -11,35 +11,39 @@ datasource db {
 }
 
 model Lead {
-  id        Int      @id @default(autoincrement())
-  name      String
-  email     String   @unique
-  source    Source
-  assigned  Assignment? // Optional relationship, a lead might not be assigned
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id            Int           @id @default(autoincrement())
+  name          String
+  email         String
+  source        Source
+  salespersonId Int?
+  salesperson   Salesperson?  @relation("LeadSalesperson", fields: [salespersonId], references: [id])
+  assignments   Assignment[]  // Add this reverse relation for Assignment
+   createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
 }
 
 model Salesperson {
-  id        Int      @id @default(autoincrement())
+   id        Int       @id @default(autoincrement())
   name      String
-  email     String   @unique
-  assignments Assignment[] // One salesperson can have many assignments
+  email     String
+  leads     Lead[]    @relation("LeadSalesperson") // One-to-many relation with Lead
+  assignments Assignment[] // One-to-many relation with Assignment
 
+  // Timestamps
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model Assignment {
-  id            Int       @id @default(autoincrement())
-  leadId        Int       @unique
-  salespersonId Int
+   id             Int        @id @default(autoincrement())
+  salespersonId  Int
+  leadId         Int
+  salesperson    Salesperson @relation(fields: [salespersonId], references: [id])
+  lead           Lead        @relation(fields: [leadId], references: [id])
 
-  lead          Lead      @relation(fields: [leadId], references: [id])
-  salesperson   Salesperson @relation(fields: [salespersonId], references: [id])
-
-  createdAt     DateTime  @default(now())
+  // Timestamps
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
 }
 
 enum Source {
