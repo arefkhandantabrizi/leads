@@ -58,8 +58,8 @@ This project is a **Lead Management System** built using **Next.js**, **Prisma**
 1. **Clone the Repository**:
 
    ```bash
-   git clone <repository-url>
-   cd lead-management-system
+   git clone https://github.com/arefkhandantabrizi/leads.git
+   cd leads
    ```
 
 2. **Install Dependencies**:
