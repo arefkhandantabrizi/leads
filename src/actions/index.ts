@@ -42,7 +42,7 @@ export async function createLead(
     const validSource: Source = source as Source; // Cast it to Source enum
 
     // Create a new record in the database
-    await db.lead.create({
+    await db?.lead?.create({
       data: {
         name,
         email,
@@ -73,7 +73,7 @@ export async function seedSalesPersons() {
   ];
 
   for (const person of salespersons) {
-    await db.salesperson.create({ data: person });
+    await db?.salesperson?.create({ data: person });
   }
 }
 
@@ -86,7 +86,7 @@ export async function assignSalesperson({
 }) {
   try {
     // Update the lead and associate it with the salesperson
-    await db.lead.update({
+    await db?.lead?.update({
       where: {
         id: leadId,
       },
