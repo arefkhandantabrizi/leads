@@ -18,8 +18,8 @@ model Lead {
   salespersonId Int?
   salesperson   Salesperson?  @relation("LeadSalesperson", fields: [salespersonId], references: [id])
   assignments   Assignment[]  // Add this reverse relation for Assignment
-   createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @default(now()) @updatedAt // Default value for updatedAt
 }
 
 model Salesperson {
@@ -30,8 +30,8 @@ model Salesperson {
   assignments Assignment[] // One-to-many relation with Assignment
 
   // Timestamps
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @default(now()) @updatedAt // Default value for updatedAt
 }
 
 model Assignment {
@@ -42,8 +42,8 @@ model Assignment {
   lead           Lead        @relation(fields: [leadId], references: [id])
 
   // Timestamps
-  createdAt      DateTime    @default(now())
-  updatedAt      DateTime    @updatedAt
+   createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @default(now()) @updatedAt // Default value for updatedAt
 }
 
 enum Source {
