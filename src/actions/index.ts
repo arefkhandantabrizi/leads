@@ -1,6 +1,5 @@
 "use server";
 
-// import { redirect } from 'next/navigation';
 import { db } from "@/db";
 
 export async function createLead(
@@ -8,7 +7,6 @@ export async function createLead(
   formData: FormData
 ) {
   try {
-    console.log(formData);
     // Check the user's inputs and make sure they're valid
     const name = formData.get("name") as string;
     const email = formData.get("email") as string;
