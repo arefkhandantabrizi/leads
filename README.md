@@ -160,8 +160,6 @@ enum Source {
 
 ## Potential Improvements
 
-## Potential Improvements
-
 ### Separate Backend Logic
 
 Currently, the backend logic (like database operations and API routes) is tightly coupled with the Next.js app. While this works for demonstration purposes, in real-world applications, separating the backend into its own Express.js app (or similar framework) can provide several advantages:
