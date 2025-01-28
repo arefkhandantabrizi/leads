@@ -160,28 +160,26 @@ enum Source {
 
 ## Potential Improvements
 
-Separate Backend Logic
+## Potential Improvements
+
+### Separate Backend Logic
 
 Currently, the backend logic (like database operations and API routes) is tightly coupled with the Next.js app. While this works for demonstration purposes, in real-world applications, separating the backend into its own Express.js app (or similar framework) can provide several advantages:
 
-Scalability: Independent scaling of backend and frontend services.
-
-Reusability: Backend APIs can be reused across multiple frontend applications (e.g., web, mobile).
-
-Security: Easier to secure and manage backend services separately.
-
-Flexibility: Freedom to choose other backend technologies or architectures.
+- **Scalability**: Independent scaling of backend and frontend services.
+- **Reusability**: Backend APIs can be reused across multiple frontend applications (e.g., web, mobile).
+- **Security**: Easier to secure and manage backend services separately.
+- **Flexibility**: Freedom to choose other backend technologies or architectures.
 
 To implement this:
 
-Create a separate Express.js application.
-
-Move the database logic and API routes to the Express app.
-
-Update the frontend to consume the backend API using fetch or a library like axios.
+1. Create a separate Express.js application.
+2. Move the database logic and API routes to the Express app.
+3. Update the front-end to consume the back-end API using `fetch` or a library like `axios`.
 
 For instance, the current lead assignment functionality could be moved to an Express route:
 
+```javascript
 app.post('/api/assign-salesperson', async (req, res) => {
   const { leadId, salespersonId } = req.body;
 
@@ -196,30 +194,27 @@ app.post('/api/assign-salesperson', async (req, res) => {
     res.status(500).json({ error: 'Failed to assign lead.' });
   }
 });
+```
 
-Improved UI/UX
+### Improved UI/UX
 
 The current UI is intended for demonstration purposes. In real-world scenarios, it would benefit from:
 
-Enhanced Design: A more polished and visually appealing interface.
+- **Enhanced Design**: A more polished and visually appealing interface.
+- **Accessibility Features**: Ensuring the app is usable for all users, including those with disabilities.
+- **Pagination and Filtering**: For better handling of large datasets.
+- **Real-time Updates**: Using WebSockets or similar technology for instant updates.
 
-Accessibility Features: Ensuring the app is usable for all users, including those with disabilities.
+### Additional Features
 
-Pagination and Filtering: For better handling of large datasets.
+- **Authentication and Authorization**: To ensure secure access.
+- **Advanced Reporting**: Detailed insights into leads and sales performance.
+- **Notifications**: Alerts for important events, such as new lead assignments.
 
-Real-time Updates: Using WebSockets or similar technology for instant updates.
-
-Additional Features
-
-Authentication and Authorization: To ensure secure access.
-
-Advanced Reporting: Detailed insights into leads and sales performance.
-
-Notifications: Alerts for important events, such as new lead assignments.
-
-Disclaimer
+## Disclaimer
 
 This UI is created for demonstration purposes only. In real-world scenarios, the design and functionality would be significantly enhanced to provide a smoother and more professional user experience.
+
 
 
 ## Troubleshooting
